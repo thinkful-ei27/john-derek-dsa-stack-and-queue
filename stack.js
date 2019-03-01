@@ -134,11 +134,11 @@ const sortStack = stack => {
   return stack;
 };
 
-const unSortedStack = new Stack();
-unSortedStack.push(2);
-unSortedStack.push(6);
-unSortedStack.push(3);
-unSortedStack.push(5);
-display(sortStack(unSortedStack));
+// const unSortedStack = new Stack();
+// unSortedStack.push(2);
+// unSortedStack.push(6);
+// unSortedStack.push(3);
+// unSortedStack.push(5);
+// display(sortStack(unSortedStack));
 
 module.exports = { Stack, stackDisplay: display };
