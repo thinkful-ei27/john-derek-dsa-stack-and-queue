@@ -85,12 +85,13 @@ const isValid = str => {
   const stack = new Stack();
 
   for (let i = 0; i < str.length; i++) {
-    if (str[i] === '(') {
+    if (str[i] === '(' || str[i] === '[' || str[i] === '{') {
       stack.push({ val: str[i], index: i });
     }
 
     if (str[i] === ')') {
       const popped = stack.pop();
+      if (popped.val !== '(') { return `Failed at character ${i + 1}`; }
       if (popped === 'Nothing to pop') { return `Failed at character ${[i + 1]}`; }
     }
   }
@@ -99,6 +100,7 @@ const isValid = str => {
 };
 
 console.log(isValid('()'));
-console.log(isValid('(()))()'));
-console.log(isValid('()(()'));
-console.log(isValid('([)]'));
+console.log(isValid('(())'));
+console.log(isValid('(()))()')); // should fail at 5
+console.log(isValid('()(()')); //shoul fail at 3
+console.log(isValid('([)]')); // should fail at 3
