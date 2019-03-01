@@ -23,6 +23,9 @@ class Stack {
   }
 
   pop() {
+    if (this.top === null) {
+      return 'Nothing to pop';
+    }
     const node = this.top;
     this.top = node.next;
     return node.data;
@@ -59,17 +62,17 @@ const display = stack => {
 
 // Check for palindromes using stack
 
-function is_palindrome(s) {
-  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
-  const regStack = new Stack();
-  for (let i = 0; i < s.length; i++) {
-    regStack.push(s[i]);
-  }
-  for (let i = 0; i < s.length; i++) {
-    if (regStack.pop() !== s[i]) { return false; }
-  }
-  return true;
-}
+// function is_palindrome(s) {
+//   s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+//   const regStack = new Stack();
+//   for (let i = 0; i < s.length; i++) {
+//     regStack.push(s[i]);
+//   }
+//   for (let i = 0; i < s.length; i++) {
+//     if (regStack.pop() !== s[i]) { return false; }
+//   }
+//   return true;
+// }
 
 // console.log(is_palindrome('dad'));
 // console.log(is_palindrome('A man, a plan, a canal: Panama'));
@@ -80,22 +83,22 @@ function is_palindrome(s) {
 // Ex. () is valid, )() is not valid
 const isValid = str => {
   const stack = new Stack();
-  let count = 0;
-  let currPop;
 
-  for (let i = str.length-1; i>=0; i--) {
-    stack.push({val: str[i], index: i});
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '(') {
+      stack.push({ val: str[i], index: i });
+    }
+
+    if (str[i] === ')') {
+      const popped = stack.pop();
+      if (popped === 'Nothing to pop') { return `Failed at character ${[i + 1]}`; }
+    }
   }
 
-  while (stack.top !== null && count>=0) {
-    currPop = stack.pop();
-    if (currPop.val === '(') count++;
-    if (currPop.val === ')') count--;
-  }
-
-  display(stack);
-  return count!==0 ? new Error(`Failed at index ${currPop.index}`) : true;
+  return stack.top === null ? true : `Open paren at character ${stack.top.data.index + 1}`;
 };
 
 console.log(isValid('()'));
-console.log(isValid(')()'));
+console.log(isValid('(()))()'));
+console.log(isValid('()(()'));
+console.log(isValid('([)]'));
