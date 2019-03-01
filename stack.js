@@ -115,7 +115,7 @@ const checkTempStack = (originalStack, targetStack, currentNode) => {
     originalStack.push(targetStack.pop());
     checkTempStack(originalStack, targetStack, currentNode);
   }
-  
+
 };
 
 const sortStack = stack => {
@@ -140,3 +140,5 @@ unSortedStack.push(6);
 unSortedStack.push(3);
 unSortedStack.push(5);
 console.log(sortStack(unSortedStack));
+
+module.exports = { Stack, stackDisplay: display };

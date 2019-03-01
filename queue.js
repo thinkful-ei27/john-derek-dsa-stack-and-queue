@@ -1,5 +1,7 @@
 'use strict';
 
+const { Stack, stackDisplay } = require('./stack');
+
 class _Node {
   constructor(value) {
     this.value = value;
@@ -55,21 +57,31 @@ const display = queue => {
   }
 };
 
-const starTrekDrills = () => {
-  const starTrekQ = new Queue();
+// const starTrekDrills = () => {
+//   const starTrekQ = new Queue();
 
-  starTrekQ.enqueue('Kirk');
-  starTrekQ.enqueue('Spock');
-  starTrekQ.enqueue('Uhura');
-  starTrekQ.enqueue('Sulu');
-  starTrekQ.enqueue('Checkov');
+//   starTrekQ.enqueue('Kirk');
+//   starTrekQ.enqueue('Spock');
+//   starTrekQ.enqueue('Uhura');
+//   starTrekQ.enqueue('Sulu');
+//   starTrekQ.enqueue('Checkov');
 
-  // console.log(peek(starTrekQ));
-  // display(starTrekQ);
+//   // console.log(peek(starTrekQ));
+//   // display(starTrekQ);
 
-  starTrekQ.dequeue();
-  starTrekQ.dequeue();
-  display(starTrekQ);
-};
+//   starTrekQ.dequeue();
+//   starTrekQ.dequeue();
+//   display(starTrekQ);
+// };
 
-starTrekDrills();
+// starTrekDrills();
+
+// Queue using Stack
+class stackQueue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+  }
+
+
+}
