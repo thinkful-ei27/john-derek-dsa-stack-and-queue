@@ -71,7 +71,31 @@ function is_palindrome(s) {
   return true;
 }
 
-console.log(is_palindrome('dad'));
-console.log(is_palindrome('A man, a plan, a canal: Panama'));
-console.log(is_palindrome('1001'));
-console.log(is_palindrome('Tauhida'));
+// console.log(is_palindrome('dad'));
+// console.log(is_palindrome('A man, a plan, a canal: Panama'));
+// console.log(is_palindrome('1001'));
+// console.log(is_palindrome('Tauhida'));
+
+// Matching parentheses in an expression
+// Ex. () is valid, )() is not valid
+const isValid = str => {
+  const stack = new Stack();
+  let count = 0;
+  let currPop;
+
+  for (let i = str.length-1; i>=0; i--) {
+    stack.push({val: str[i], index: i});
+  }
+
+  while (stack.top !== null && count>=0) {
+    currPop = stack.pop();
+    if (currPop.val === '(') count++;
+    if (currPop.val === ')') count--;
+  }
+
+  display(stack);
+  return count!==0 ? new Error(`Failed at index ${currPop.index}`) : true;
+};
+
+console.log(isValid('()'));
+console.log(isValid(')()'));
