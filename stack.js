@@ -33,7 +33,7 @@ class Stack {
 }
 
 const peek = stack => {
-  return stack.top.data;
+  return stack.top ? stack.top.data : null;
 };
 
 const display = stack => {
@@ -62,23 +62,24 @@ const display = stack => {
 
 // Check for palindromes using stack
 
-// function is_palindrome(s) {
-//   s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
-//   const regStack = new Stack();
-//   for (let i = 0; i < s.length; i++) {
-//     regStack.push(s[i]);
-//   }
-//   for (let i = 0; i < s.length; i++) {
-//     if (regStack.pop() !== s[i]) { return false; }
-//   }
-//   return true;
-// }
+function is_palindrome(s) {
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+  const regStack = new Stack();
+  for (let i = 0; i < s.length; i++) {
+    regStack.push(s[i]);
+  }
+  for (let i = 0; i < s.length; i++) {
+    if (regStack.pop() !== s[i]) { return false; }
+  }
+  return true;
+}
 
 // console.log(is_palindrome('dad'));
 // console.log(is_palindrome('A man, a plan, a canal: Panama'));
 // console.log(is_palindrome('1001'));
 // console.log(is_palindrome('Tauhida'));
 
+// TODO: Finish extension exercises
 // Matching parentheses in an expression
 // Ex. () is valid, )() is not valid
 const isValid = str => {
@@ -99,8 +100,43 @@ const isValid = str => {
   return stack.top === null ? true : `Open paren at character ${stack.top.data.index + 1}`;
 };
 
-console.log(isValid('()'));
-console.log(isValid('(())'));
-console.log(isValid('(()))()')); // should fail at 5
-console.log(isValid('()(()')); //shoul fail at 3
-console.log(isValid('([)]')); // should fail at 3
+// console.log(isValid('()'));
+// console.log(isValid('(())'));
+// console.log(isValid('(()))()')); // should fail at 5
+// console.log(isValid('()(()')); //shoul fail at 3
+// console.log(isValid('([)]')); // should fail at 3
+
+// Sort Stack
+const checkTempStack = (originalStack, targetStack, currentNode) => {
+  let nextNode = peek(targetStack);
+  if (nextNode === null || nextNode <= currentNode) {
+    return targetStack.push(currentNode);
+  } else {
+    originalStack.push(targetStack.pop());
+    checkTempStack(originalStack, targetStack, currentNode);
+  }
+  
+};
+
+const sortStack = stack => {
+  const tempStack = new Stack();
+  let currentNode;
+
+  while (stack.top !== null) {
+    currentNode = stack.pop();
+    checkTempStack(stack, tempStack, currentNode);
+  }
+
+  while (tempStack.top !== null) {
+    stack.push(tempStack.pop());
+  }
+
+  return stack;
+};
+
+const unSortedStack = new Stack();
+unSortedStack.push(2);
+unSortedStack.push(6);
+unSortedStack.push(3);
+unSortedStack.push(5);
+console.log(sortStack(unSortedStack));
