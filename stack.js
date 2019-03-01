@@ -29,6 +29,10 @@ class Stack {
   }
 }
 
+const peek = stack => {
+  return stack.top.data;
+};
+
 const main = () => {
   const starTrek = new Stack();
 
@@ -37,7 +41,7 @@ const main = () => {
   starTrek.push('McCoy');
   starTrek.push('Scotty');
 
-  console.log(starTrek);
+  console.log(peek(starTrek));
 };
 
 main();
