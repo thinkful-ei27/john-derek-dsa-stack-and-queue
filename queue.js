@@ -77,11 +77,36 @@ const display = queue => {
 // starTrekDrills();
 
 // Queue using Stack
-class stackQueue {
+class StackQueue {
   constructor() {
-    this.first = null;
-    this.last = null;
+    this.mainStack = new Stack();
+    this.tempStack = new Stack();
   }
 
+  enqueue(value) {
+    this.mainStack.push(value);
+  }
+
+  dequeue() {
+    let currentNode;
+    while (this.mainStack.top !== null) {
+      console.log(this.tempStack);
+      if (currentNode !== undefined) {
+        this.tempStack.push(currentNode);
+      }
+      currentNode = this.mainStack.pop();
+    }
+    while (this.tempStack.top !== null) {
+      this.mainStack.push(this.tempStack.pop());
+    }
+  }
 
 }
+
+const stackQueueTest = new StackQueue();
+stackQueueTest.enqueue('first');
+stackQueueTest.enqueue('second');
+stackQueueTest.enqueue('third');
+// stackDisplay(stackQueueTest.mainStack);
+stackQueueTest.dequeue();
+stackDisplay(stackQueueTest.mainStack);

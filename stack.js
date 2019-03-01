@@ -139,6 +139,6 @@ unSortedStack.push(2);
 unSortedStack.push(6);
 unSortedStack.push(3);
 unSortedStack.push(5);
-console.log(sortStack(unSortedStack));
+display(sortStack(unSortedStack));
 
 module.exports = { Stack, stackDisplay: display };
